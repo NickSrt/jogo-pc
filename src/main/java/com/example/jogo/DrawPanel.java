@@ -46,7 +46,7 @@ public class DrawPanel extends JPanel implements KeyListener {
     private static final int PLAYER_FIRERATE = 10;
     private static final int PLAYER_WIDTH = 50;
     private static final int PLAYER_HEIGHT = 50;
-    private static final int PLAYER_SPEED = 3;
+    private static final int PLAYER_SPEED = 4;
     private static final int BOSS_LIFE = 50;
     private static final int BOSS_SKIN1 = 27;
     private static final int BOSS_SKIN2 = 28;
@@ -105,7 +105,7 @@ public class DrawPanel extends JPanel implements KeyListener {
                 pause = false;
             }
         }
-        if (key == KeyEvent.VK_M) {
+        if (key == KeyEvent.VK_M ||  key == KeyEvent.VK_ENTER) {
             mute = !mute;
         }
         //upgrades
@@ -852,9 +852,10 @@ public class DrawPanel extends JPanel implements KeyListener {
             if (enemy_counter > (1000 / (level * 2)) && level != MID_LEVEL && level != MAX_LEVEL) {
                 if (enemy[en] == null) {
                     enemy[en] = new Entity(800, (int) (Math.random() * 600), 1, 100, 50, 50);
-                    enemy[en].skin = 13 + (int) (Math.random() * (3 * level));
-                    enemy[en].life = level * 5;
-                    enemy[en].speed = level;
+                    
+                    enemy[en].skin = 13 + (int) (Math.random() * Math.min(level * 2,14) );
+                    enemy[en].life = level * 2;
+                    enemy[en].speed = (int) level/4 + 1;
                     en++;
                     en %= max_enemies;
                     enemy_counter = 0;
